@@ -14,7 +14,7 @@ def operation(code: int):
 class IntCodeProcessor:
     def __init__(self, int_code: []):
         self.int_code = int_code
-        # self.original_int_code = int_code[:]
+        self.original_int_code = int_code[:]
         self.position = 0
 
     def next_code_block(self) -> []:
@@ -24,7 +24,7 @@ class IntCodeProcessor:
         return result
 
     def process_code_block(self, code_block: []):
-        print(f'processing {code_block} at pos ({self.position - 4})')
+        # print(f'processing {code_block} at pos ({self.position - 4})')
         op = operation(code_block[0])
         p = code_block[1:]
 
@@ -49,6 +49,11 @@ class IntCodeProcessor:
             res = self.process_code_block(code_block)
             code_block = self.next_code_block()
         return self.int_code
+
+    def reset(self):
+        self.int_code = self.original_int_code[:]
+        self.position = 0
+        return
 
 
 def op_add(left: int, right: int):

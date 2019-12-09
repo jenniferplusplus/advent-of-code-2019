@@ -9,7 +9,20 @@ input = [1, 12, 2, 3, 1, 1, 2, 3, 1, 3, 4, 3, 1, 5, 0, 3, 2, 6, 1, 19, 1, 19, 9,
          99, 2, 0, 14, 0]
 
 # int_code = str.split(sys.argv[1], ',')
-icp = IntCodeProcessor(input)
+icp = IntCodeProcessor(input[:])
 icp.process_int_code()
 
-print(icp.int_code)
+print(f'initial calculation: ({icp.int_code[0]})')
+
+for noun in range(0, 99):
+    for verb in range(0, 99):
+        icp.reset()
+        icp.int_code[1] = noun
+        icp.int_code[2] = verb
+        icp.process_int_code()
+        if icp.int_code[0] == 19690720:
+            print(f'found starting values ({noun:02d}{verb:02d})')
+            print(icp.int_code[0])
+            exit(0)
+
+print('did not find any successful input values')
